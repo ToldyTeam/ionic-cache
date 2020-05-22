@@ -1,7 +1,9 @@
-# Ionic cache service
+# Ionic cache service for Capacitor
 
-Ionic cache service that can cache almost everything. **It caches requests, observables, promises and classic data.** It uses [Ionic Storage](https://ionicframework.com/docs/storage/) so we support IndexedDB, SQLite (Cordova), WebSQL in this order.
-It can be used separatelety in Angular 2 application.
+Fork from https://www.npmjs.com/package/ionic-cache
+
+Ionic cache service that can cache almost everything. **It caches requests, observables, promises and classic data.** It uses [Ionic Capacitor Storage](https://capacitor.ionicframework.com/docs/apis/storage/) 
+It can be used separatelety in Angular >7 application.
 
 Key features:
 + Request caching

@@ -12,7 +12,6 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
-import { Storage } from '@ionic/storage';
 
 import { of, throwError } from 'rxjs';
 import { count } from 'rxjs/operators';
@@ -48,10 +47,7 @@ describe('CacheService', () => {
   beforeAll(async (done) => {
     service = new CacheService(
       new CacheStorageService(
-        new Storage({
-          name: '__ionicCache',
-          driverOrder: ['indexeddb', 'sqlite', 'websql'],
-        }),
+        
         'ionic-cache-test'
       )
     );
@@ -261,10 +257,6 @@ describe('CacheService', () => {
 
       let secondService = new CacheService(
         new CacheStorageService(
-          new Storage({
-            name: '__ionicCache',
-            driverOrder: ['indexeddb', 'sqlite', 'websql'],
-          }),
           'ionic-cache-test'
         )
       );
@@ -299,13 +291,10 @@ describe('deleting items', () => {
   let cacheValue = 'always money';
 
   beforeAll(async (done) => {
-    storage = new Storage({
-      name: '__ionicCache',
-      driverOrder: ['indexeddb', 'sqlite', 'websql'],
-    });
+  
 
     service = new CacheService(
-      new CacheStorageService(storage, 'ionic-cache-test')
+      new CacheStorageService( 'ionic-cache-test')
     );
 
     await service.ready();
@@ -349,10 +338,7 @@ describe('CacheService Deletion', () => {
   beforeEach(async (done) => {
     service = new CacheService(
       new CacheStorageService(
-        new Storage({
-          name: '__ionicCache',
-          driverOrder: ['indexeddb', 'sqlite', 'websql'],
-        }),
+        
         'ionic-cache-test'
       )
     );
@@ -455,10 +441,7 @@ describe('Observable Caching', () => {
   beforeAll(async (done) => {
     service = new CacheService(
       new CacheStorageService(
-        new Storage({
-          name: '__ionicCache',
-          driverOrder: ['indexeddb', 'sqlite', 'websql'],
-        }),
+        
         'ionic-cache-test'
       )
     );
@@ -522,10 +505,7 @@ describe('Observable caching errors', () => {
   beforeAll(async (done) => {
     service = new CacheService(
       new CacheStorageService(
-        new Storage({
-          name: '__ionicCache',
-          driverOrder: ['indexeddb', 'sqlite', 'websql'],
-        }),
+        
         'ionic-cache-test'
       )
     );
@@ -576,10 +556,7 @@ describe('Observable blob caching errors', () => {
   beforeAll(async (done) => {
     service = new CacheService(
       new CacheStorageService(
-        new Storage({
-          name: '__ionicCache',
-          driverOrder: ['indexeddb', 'sqlite', 'websql'],
-        }),
+        
         'ionic-cache-test'
       )
     );
@@ -632,10 +609,7 @@ describe('Observable Blob Caching', () => {
   beforeAll(async (done) => {
     service = new CacheService(
       new CacheStorageService(
-        new Storage({
-          name: '__ionicCache',
-          driverOrder: ['indexeddb', 'sqlite', 'websql'],
-        }),
+        
         'ionic-cache-test'
       )
     );
@@ -704,10 +678,7 @@ describe('Delayed observable caching', () => {
   beforeAll(async (done) => {
     service = new CacheService(
       new CacheStorageService(
-        new Storage({
-          name: '__ionicCache',
-          driverOrder: ['indexeddb', 'sqlite', 'websql'],
-        }),
+        
         'ionic-cache-test'
       )
     );
@@ -806,10 +777,7 @@ describe('Delayed observable caching error', () => {
   beforeAll(async (done) => {
     service = new CacheService(
       new CacheStorageService(
-        new Storage({
-          name: '__ionicCache',
-          driverOrder: ['indexeddb', 'sqlite', 'websql'],
-        }),
+        
         'ionic-cache-test'
       )
     );

@@ -1,6 +1,5 @@
 import { NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
 import { CacheConfig, CacheService } from './cache.service';
-import { IonicStorageModule, Storage } from '@ionic/storage';
 import { CacheStorageService } from './cache-storage';
 
 export const CONFIG = new InjectionToken<CacheConfig>('CONFIG');
@@ -9,20 +8,17 @@ let cacheConfigDefaults: CacheConfig = {
   keyPrefix: '',
 };
 
-export function buildCacheService(storage: Storage, cacheConfig: CacheConfig) {
+export function buildCacheService( cacheConfig: CacheConfig) {
   cacheConfig = Object.assign(cacheConfigDefaults, cacheConfig);
 
   return new CacheService(
-    new CacheStorageService(storage, cacheConfig.keyPrefix)
+    new CacheStorageService( cacheConfig.keyPrefix)
   );
 }
 
 @NgModule({
   imports: [
-    IonicStorageModule.forRoot({
-      name: '__ionicCache',
-      driverOrder: ['indexeddb', 'sqlite', 'websql'],
-    }),
+   
   ],
 })
 export class CacheModule {
@@ -34,7 +30,7 @@ export class CacheModule {
         {
           provide: CacheService,
           useFactory: buildCacheService,
-          deps: [Storage, CONFIG],
+          deps: [ CONFIG],
         },
       ],
     };

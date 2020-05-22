@@ -215,7 +215,7 @@ export class CacheService {
   }
 
   // Technique derived from: https://stackoverflow.com/a/18650249
-  private asBase64(blob): Promise<string> {
+  private asBase64(blob): Promise<string|ArrayBuffer> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(blob);

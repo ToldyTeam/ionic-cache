@@ -1,4 +1,5 @@
-import { Storage } from '@ionic/storage';
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
 
 export interface StorageCacheItem {
   key: string;
@@ -9,46 +10,49 @@ export interface StorageCacheItem {
 }
 
 export class CacheStorageService {
-  constructor(private storage: Storage, private keyPrefix: string) {}
+  constructor( private keyPrefix: string) {}
 
   public ready() {
-    return this.storage.ready();
+    return Storage!==undefined;
   }
 
   public async set(key: string, value: any) {
     await this.ready();
 
-    return this.storage.set(this.buildKey(key), value);
+    return Storage.set({key:this.buildKey(key),value: JSON.stringify(value)});
   }
 
   public async remove(key: string) {
     await this.ready();
 
-    return this.storage.remove(this.buildKey(key));
+    return Storage.remove({ key:this.buildKey(key)});
   }
 
   public async get(key: string) {
     await this.ready();
 
-    let value = await this.storage.get(this.buildKey(key));
-    return !!value ? Object.assign({ key: key }, value) : null;
+    let value = await Storage.get({key:this.buildKey(key)});
+    return !!value ? Object.assign({ key: key },JSON.parse( value.value)) : null;
   }
 
   public async exists(key: string) {
     await this.ready();
 
-    return !!(await this.storage.get(this.buildKey(key)));
+    return !!(await Storage.get({key:this.buildKey(key)}));
   }
 
   public async all(): Promise<StorageCacheItem[]> {
     await this.ready();
 
     let items: StorageCacheItem[] = [];
-    await this.storage.forEach((val: any, key: string) => {
-      if (this.isCachedItem(key, val)) {
-        items.push(Object.assign({ key: this.debuildKey(key) }, val));
-      }
-    });
+	 const { keys }=await  Storage.keys()
+	 keys.forEach(key=>{
+		Storage.get({key:key}).then(val=>{
+			if (this.isCachedItem(key, val.value)) {
+				items.push(Object.assign({ key: this.debuildKey(key) },JSON.parse(val.value)));
+			}
+		})
+	 })	
 
     return items;
   }
