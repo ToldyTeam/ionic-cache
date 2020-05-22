@@ -2,7 +2,7 @@
 
 Fork from https://www.npmjs.com/package/ionic-cache
 
-Ionic cache service that can cache almost everything. **It caches requests, observables, promises and classic data.** It uses [Ionic Capacitor Storage](https://capacitor.ionicframework.com/docs/apis/storage/) 
+Ionic cache service that can cache almost everything. **It caches requests, observables, promises and classic data.** It uses [Ionic Capacitor Storage](https://capacitor.ionicframework.com/docs/apis/storage/)  instead of Ionic Cordova Storage
 It can be used separatelety in Angular >7 application.
 
 Key features:
@@ -24,15 +24,13 @@ Please report all bugs to bug report or fix it and send pull request :)
 Via NPM:
 
 ```bash
-npm install ionic-cache @ionic/storage --save
+npm install ionic-cache @capacitor/core --save
 ```
 
 or Yarn:
 ```bash
-yarn add ionic-cache @ionic/storage
+yarn add ionic-cache @capacitor/core
 ```
-
-You can optionally add [Cordova SQLite](https://ionicframework.com/docs/native/sqlite/).
 
 And inject service to your app:
 
