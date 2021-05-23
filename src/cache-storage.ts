@@ -1,5 +1,5 @@
-import { Plugins } from '@capacitor/core';
-const { Storage } = Plugins;
+import { Storage } from '@capacitor/storage';
+
 
 export interface StorageCacheItem {
   key: string;
